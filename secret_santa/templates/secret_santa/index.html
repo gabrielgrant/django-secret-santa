@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+	<title>Floyd Christmas Hat</title>
+</head>
+<body>
+	{% if form %}
+	<h1>Hello fellow Floyd Family Christmas Attendee!</h1>
+	<p>
+		Enter your name and a password to be randomly assigned
+		the family member you will be shopping for. Remember,
+		Marg, Keiran and Alicia are on the &lquo;Gifts from All&rquo; list.
+	</p>
+	<form method="post" action="">{% csrf_token %}
+	{{ form.as_p }}
+	<p><input type="submit" /></p>
+	</form>
+	{% else %}
+	<p>You're buying for {{ reciever.name }}</p> 
+	{% endif %}
+</body>
+</html>
