@@ -16,9 +16,9 @@ class Family(models.Model):
 class Person(models.Model):
 	name = models.CharField(max_length=255, unique=True, db_index=True)
 	family = models.ForeignKey(Family, related_name='members')
-	key = models.CharField(max_length=40)  # length of sha1 hash
+	key = models.CharField(max_length=40, blank=True)  # length of sha1 hash
 	#has_chosen = models.BooleanField(default=False)
-	chosen_family = models.ForeignKey(Family, related_name='givers', null=True)
+	chosen_family = models.ForeignKey(Family, related_name='givers', null=True, blank=True)
 	def get_allowed_families(self):
 		family_giving_counts = self.family.get_family_giving_counts()
 		family_giving_counts.pop(None)
