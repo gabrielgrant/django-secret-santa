@@ -8,6 +8,5 @@ setup(
     license='LGPL',
     long_description=open('README').read(),
     install_requires=[
-        'django',
     ],
 )
