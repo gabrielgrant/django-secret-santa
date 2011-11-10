@@ -12,9 +12,9 @@ class SantaForm(forms.Form):
 	)
 	password = forms.CharField(label='Choose a password', widget=forms.PasswordInput)
 	def __init__(self, *args, **kwargs):
+		super(SantaForm, self).__init__(*args, **kwargs)
 		choices = [(p.name, p.name) for p in Person.objects.all()]
 		self.fields['giver'].choices = choices
-		super(SantaForm, self).__init__(*args, **kwargs)
 	def clean(self):
 		giver = self.cleaned_data['giver']
 		password = self.cleaned_data['password']
