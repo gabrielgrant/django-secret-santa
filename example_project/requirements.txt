@@ -1,0 +1,2 @@
+django
+https://github.com/gabrielgrant/django-secret-santa/tarball/master

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mkdir -p ~/data
+
+python ~/current/project/manage.py syncdb --noinput
+#python ~/current/project/manage.py migrate --noinput
+python ~/current/project/manage.py collectstatic --noinput
