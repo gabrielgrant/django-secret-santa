@@ -10,8 +10,13 @@ class Family(models.Model):
 		counts = Person.objects.filter(family=self)  \
 			.values('chosen_family')  \
 			.order_by()  \
-			.annotate(models.Count('chosen_family'))
-		return counts
+			.annotate(count=models.Count('chosen_family'))
+		counts_d = dict((c['chosen_family'], c['count']) for c in counts)
+		counts_d.pop(None, None)
+		all_counts_d = {}
+		for f in Family.objects.all():
+			all_counts_d[f] = counts_d.get(f.pk, 0)
+		return all_counts_d
 
 class Person(models.Model):
 	name = models.CharField(max_length=255, unique=True, db_index=True)
