@@ -27,11 +27,6 @@ class Person(models.Model):
 		return set(family for family, count in family_giving_counts.iteritems() if count == min_count)
 			
 	def get_receiver(self):
-		if not isinstance(giver, Person):
-			if isinstance(giver, basestring):
-				giver = Person.objects.get(giver)
-			else:
-				raise TypeError('giver must be a Person model or a name string')
 		allowed_families = self.get_allowed_families()
 		receiver = Person.objects.filter(
 			key=None,
