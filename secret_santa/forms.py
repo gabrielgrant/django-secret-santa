@@ -27,4 +27,5 @@ class SantaForm(forms.Form):
 					"You've already chosen, but the password you entered does not match."
 				)
 			self.cleaned_data['receiver'] = receiver
+		self.cleaned_data['key'] = key
 		return self.cleaned_data

@@ -11,7 +11,7 @@ class ChooseView(FormView):
 		giver = form.cleaned_data['giver']
 		receiver = form.cleaned_data.get('receiver')
 		if receiver is None:
-			receiver = giver.get_receiver()
+			receiver = giver.get_receiver(form.cleaned_data['key'])
 		return self.render_to_response(receiver=receiver, giver=giver)
 		return 
 		giver_name = form.cleaned_data['name']
