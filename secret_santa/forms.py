@@ -10,7 +10,7 @@ class SantaForm(forms.Form):
 		coerce=lambda x: Person.objects.get(name=x),
 		empty_value=None,
 	)
-	password = forms.PasswordField(label='Choose a password')
+	password = forms.CharField(label='Choose a password', widget=forms.PasswordInput)
 	def __init__(self, *args, **kwargs):
 		choices = [(p.name, p.name) for p in Person.objects.all()]
 		self.fields['giver'].choices = choices

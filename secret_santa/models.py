@@ -5,10 +5,11 @@ class Family(models.Model):
 		return ', '.join(m.name for m in self.members)
 	def get_family_giving_counts(self):
 		""" Returns the number of members of this family giving to each other family """
+		# note: "order_by()" is needed to exclude default ordering
 		counts = Person.objects.filter(family=self)  \
 			.values('chosen_family')  \
-			.order_by()  \  # exclude default ordering
-			.annotate(models.Count('chosen_family')
+			.order_by()  \
+			.annotate(models.Count('chosen_family'))
 		return counts
 
 class Person(models.Model):
