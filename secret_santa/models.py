@@ -3,7 +3,7 @@ from django.db import models
 class Family(models.Model):
 	name = models.CharField(max_length=255, unique=True)
 	def __unicode__(self):
-		return self.name + ': ' + ', '.join(m.name for m in self.members.all())
+		return self.name
 	def get_family_giving_counts(self):
 		""" Returns the number of members of this family giving to each other family """
 		# note: "order_by()" is needed to exclude default ordering
