@@ -1,0 +1,11 @@
+Secre Santa implementation for Django
+
+Meets a few specific requirements:
+
+- people won't be assigned as "Santa" for their immediate family members or themselves
+- it is impossible for anyone (even the server admin) to find out who is buying for whom
+- is an example of a cleanly implemented Django application
+
+If you find any problems with this (especially concerning the last requriement), please let me know.
+
+
