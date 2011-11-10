@@ -1,2 +1,2 @@
-recurive-include secret_santa/templates *.html
+recursive-include secret_santa/templates *.html
 
