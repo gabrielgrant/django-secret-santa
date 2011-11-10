@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-secret-santa',
-    version='0.1.1dev',
+    version='0.1.2dev',
     author='Gabriel Grant',
     packages=['secret_santa'],
     license='LGPL',
