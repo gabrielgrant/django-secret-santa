@@ -12,13 +12,6 @@ class ChooseView(FormView):
 		receiver = form.cleaned_data.get('receiver')
 		if receiver is None:
 			receiver = giver.get_receiver(form.cleaned_data['key'])
-		return self.render_to_response(receiver=receiver, giver=giver)
-		return 
-		giver_name = form.cleaned_data['name']
-		password = form.cleaned_data['password']
-		make_key(giver.name, password)
-		try:
-			receiver = Person.objects.get(key=key)
-		except Person.DoesNotExist:
-			giver = Person.objects.get(name=name)
+		context = {'receiver': receiver, 'giver': giver}
+		return self.render_to_response(context)
 
