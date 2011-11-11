@@ -1,4 +1,8 @@
 # Django settings for project project.
+import os
+
+ROOT = os.path.dirname(__file__)
+rootify = lambda x: os.path.abspath(os.path.join(ROOT, x))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,10 +13,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+DOTCLOUD = os.path.isfile('/home/dotcloud/environment.json')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/dotcloud/data/db.sqlite',                      # Or path to database file if using sqlite3.
+        'NAME': '/home/dotcloud/data/db.sqlite' if DOTCLOUD else rootify('santa.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -56,7 +62,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/home/dotcloud/current/static/'
+STATIC_ROOT = rootify('../static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -103,7 +109,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'project.urls'
 
 TEMPLATE_DIRS = (
-    '/home/dotcloud/current/project/templates',
+    rootify('templates'),
 )
 
 INSTALLED_APPS = (
