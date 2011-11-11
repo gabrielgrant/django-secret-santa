@@ -1,0 +1,120 @@
+[
+  {
+    "pk": 1, 
+    "model": "secret_santa.family", 
+    "fields": {
+      "name": "Fulton Ave."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "secret_santa.family", 
+    "fields": {
+      "name": "Henning Blvd."
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "secret_santa.family", 
+    "fields": {
+      "name": "Keswick"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "secret_santa.family", 
+    "fields": {
+      "name": "'sauga"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Jordan", 
+      "family": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Meg", 
+      "family": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Gabriel", 
+      "family": 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Cynthia", 
+      "family": 3
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Richard", 
+      "family": 3
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Gordon", 
+      "family": 2
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Jeff", 
+      "family": 2
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Dave", 
+      "family": 4
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Susan", 
+      "family": 4
+    }
+  }
+]
