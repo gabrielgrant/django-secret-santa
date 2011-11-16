@@ -16,16 +16,19 @@ class SantaForm(forms.Form):
 		choices = [(p.name, p.name) for p in Person.objects.all()]
 		self.fields['giver'].choices = choices
 	def clean(self):
-		giver = self.cleaned_data['giver']
-		password = self.cleaned_data['password']
-		key = make_key(giver.name, password)
-		if giver.chosen_family is not None:
-			try:
-				receiver = Person.objects.get(key=key)
-			except Person.DoesNotExist:
-				raise Form.ValidationError(
-					"You've already chosen, but the password you entered does not match."
-				)
-			self.cleaned_data['receiver'] = receiver
-		self.cleaned_data['key'] = key
-		return self.cleaned_data
+		cleaned_data = super(SantaForm, self).clean()
+		giver = cleaned_data.get('giver')
+		password = cleaned_data.get('password')
+		if giver and password:
+			# only process if the fields are present and validated so far
+			key = make_key(giver.name, password)
+			if giver.chosen_family is not None:
+				try:
+					receiver = Person.objects.get(key=key)
+				except Person.DoesNotExist:
+					raise forms.ValidationError(
+						"%s, you've already chosen a password, but the password you just entered does not match." % giver.name
+					)
+				cleaned_data['receiver'] = receiver
+			cleaned_data['key'] = key
+		return cleaned_data
