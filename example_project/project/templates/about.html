@@ -1,0 +1,73 @@
+{% extends 'secret_santa/form.html' %}
+
+<! doctype html>
+<html>
+<head>
+<title>Floyd Family Christmas - {% block head_title %}About{% endblock %}</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/secret_santa/font/fonts.css" />
+<link href='http://fonts.googleapis.com/css?family=Tangerine:700|Patrick+Hand|Neucha|Schoolbell|Dancing+Script:700|Delius|Indie+Flower|Architects+Daughter' rel='stylesheet' type='text/css'>
+{% block extra_head %}
+
+<style type="text/css">
+.content .info {
+	top: 0;
+	margin-top: 70px;
+	margin-bottom: 40px;
+	width: 500px;
+	text-align: left;
+}
+.content .info p, .content .info li {
+	margin-top: 0.5em;
+}
+.content .info li {
+	margin-left: 30px;
+}
+
+
+</style>
+{% endblock extra_head %}
+</head>
+<body>
+	{% block page_title %}About the Machine{% endblock %}
+	{% block content_body %}
+	<div class="info">
+	<p>
+		I'm in San Francisco, the rest of the family is not, and Secret
+		Santa isn't nearly as fun when there's no secret. Behold, the
+		wonders of the interwebs!
+	</p>
+	<p>
+		Beyond just having to be in the same place, the picking is
+		usually a bit of an ordeal, because we try to avoid certain pairings
+		(like buying for oneself or immediate family members).
+		My matching algorithm should get around all these problems:
+	</p>
+	<ul>
+		<li>People won't be assigned as "Santa" for themselves</li>
+		<li>Balancing between families is maximized</li>
+		<li>
+			Exchanges between immediate family members are avoided
+			if at all possible
+		</li>
+		<li>
+			No two people will exchange directly with eachother &ndash;
+			there should always be at least one person in between
+		</li>
+		<li>
+			The passwords encrypt the exchange information, so it is
+			impossible for anyone (even someone with admin access to
+			the server) to find out who is "Santa-ing" for whom
+		</li>
+	</ul>
+	<p>
+		Yes, I do realize this is kind of over-done. Yes, it is tacky.
+		And yes, in case you had any doubts, I'm a bit of a geek.
+	</p>
+	</div>
+	{% endblock content_body %}
+	{% block extra_body %}{% endblock %}
+</body>
+</html>
+
+

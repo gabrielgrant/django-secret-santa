@@ -1,0 +1,31 @@
+{% extends 'secret_santa/form.html' %}
+
+<! doctype html>
+<html>
+<head>
+<title>Floyd Family Christmas - {% block head_title %}Contact{% endblock %}</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/secret_santa/font/fonts.css" />
+<link href='http://fonts.googleapis.com/css?family=Tangerine:700|Patrick+Hand|Neucha|Schoolbell|Dancing+Script:700|Delius|Indie+Flower|Architects+Daughter' rel='stylesheet' type='text/css'>
+{% block extra_head %}
+
+<style type="text/css">
+
+.content .info {
+	top: 0;
+	margin-top: 100px;
+}
+
+</style>
+{% endblock extra_head %}
+</head>
+<body>
+	{% block page_title %}Contact the Machine{% endblock %}
+	{% block content_body %}
+	<p class="info"><a href="mailto:Gabriel Grant <g@briel.ca>">Send me an email</a></p>
+	{% endblock content_body %}
+	{% block extra_body %}{% endblock %}
+</body>
+</html>
+
+
