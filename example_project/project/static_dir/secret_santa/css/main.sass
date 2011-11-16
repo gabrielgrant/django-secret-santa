@@ -1,0 +1,430 @@
+
+$semi-grey: rgba(0, 0, 0, 0.5)
+$semi-white: rgba(255, 255, 255, 0.5)
+
+$content-width: 810px
+
+@mixin container
+	margin: auto
+	width: $content-width
+
+@mixin multi-box-shadow($shadow-1, $shadow-2: false, $shadow-3: false, $shadow-4: false, $shadow-5: false, $shadow-6: false, $shadow-7: false, $shadow-8: false, $shadow-9: false)
+	$full: $shadow-1
+	@if $shadow-2
+		$full: $full + "," + $shadow-2
+	@if $shadow-3
+		$full: $full + "," + $shadow-3
+	@if $shadow-4
+		$full: $full + "," + $shadow-4
+	@if $shadow-5
+		$full: $full + "," + $shadow-5
+	@if $shadow-6
+		$full: $full + "," + $shadow-6
+	@if $shadow-7
+		$full: $full + "," + $shadow-7
+	@if $shadow-8
+		$full: $full + "," + $shadow-8
+	@if $shadow-9
+		$full: $full + "," + $shadow-9
+
+	$full: unquote($full)
+	-moz-box-shadow: $full
+	-webkit-box-shadow: $full
+	-o-box-shadow: $full
+	box-shadow: $full
+
+
+$default-text-shadow-color: $semi-grey
+$default-text-shadow-blur: 3px
+$default-text-shadow-v-offset: 2px
+
+@import "compass/css3"
+
+/*
+	depth = 6
+	vendors = 'webkit moz o ms'.split()
+	args = ', '.join(('$transition-%s: false' % i) for i in range(2, depth+1))
+	def assign_with_transform_check(i, tab_depth, append=True):
+		tabs = '\t' * tab_depth
+		if append:
+			append_str = '$full-{v} + "," + '
+		else:
+			append_str = ''
+		print tabs + '@if nth($transition-%s, 1) == "transform"' % i
+		for v in vendors:
+			raw_str = '\t$full-{v}: ' + append_str + '"-{v}-" + $transition-{i}'
+			print tabs + raw_str.format(v=v, i=i)
+		print tabs + '@else'
+		for v in vendors:
+			raw_str = '\t$full-{v}: ' + append_str + '$transition-{i}'
+			print tabs + raw_str.format(v=v, i=i)
+	
+	print '@mixin transition($transition-1, %s)' % args
+	for v in vendors:
+		print '\t$full-{v}: ""'.format(v=v)
+	assign_with_transform_check(1, tab_depth=1, append=False)
+	for i in range(2, depth+1):
+		print '\t@if $transition-%s' % i
+		assign_with_transform_check(i, tab_depth=2)
+	for v in vendors:
+		print "\t-{v}-transition: unquote($full-{v})".format(v=v)
+
+@mixin transition($transition-1, $transition-2: false, $transition-3: false, $transition-4: false, $transition-5: false, $transition-6: false)
+	@if nth(1, $transition-1) == "transition"
+		$full-webkit: "-webkit-" + $transition-1
+		$full-moz: "-moz-" + $transition-1
+		$full-o: "-o-" + $transition-1
+		$full-ms: "-ms-" + $transition-1
+	@if $transition-2
+		$full: $full + "," + $transition-2
+	@if $transition-3
+		$full: $full + "," + $transition-3
+	@if $transition-4
+		$full: $full + "," + $transition-4
+	@if $transition-5
+		$full: $full + "," + $transition-5
+	@if $transition-6
+		$full: $full + "," + $transition-6
+	
+
+	-webkit-transition: $full
+	-moz-transition: $full
+	-o-transition: $full
+	-ms-transition: $full
+
+@mixin transition($transition-1, $transition-2: false, $transition-3: false, $transition-4: false, $transition-5: false, $transition-6: false)
+	$full-webkit: ""
+	$full-moz: ""
+	$full-o: ""
+	$full-ms: ""
+	@if nth($transition-1, 1) == "transform"
+		$full-webkit: "-webkit-" + $transition-1
+		$full-moz: "-moz-" + $transition-1
+		$full-o: "-o-" + $transition-1
+		$full-ms: "-ms-" + $transition-1
+	@else
+		$full-webkit: $transition-1
+		$full-moz: $transition-1
+		$full-o: $transition-1
+		$full-ms: $transition-1
+	@if $transition-2
+		@if nth($transition-2, 1) == "transform"
+			$full-webkit: $full-webkit + "," + "-webkit-" + $transition-2
+			$full-moz: $full-moz + "," + "-moz-" + $transition-2
+			$full-o: $full-o + "," + "-o-" + $transition-2
+			$full-ms: $full-ms + "," + "-ms-" + $transition-2
+		@else
+			$full-webkit: $full-webkit + "," + $transition-2
+			$full-moz: $full-moz + "," + $transition-2
+			$full-o: $full-o + "," + $transition-2
+			$full-ms: $full-ms + "," + $transition-2
+	@if $transition-3
+		@if nth($transition-3, 1) == "transform"
+			$full-webkit: $full-webkit + "," + "-webkit-" + $transition-3
+			$full-moz: $full-moz + "," + "-moz-" + $transition-3
+			$full-o: $full-o + "," + "-o-" + $transition-3
+			$full-ms: $full-ms + "," + "-ms-" + $transition-3
+		@else
+			$full-webkit: $full-webkit + "," + $transition-3
+			$full-moz: $full-moz + "," + $transition-3
+			$full-o: $full-o + "," + $transition-3
+			$full-ms: $full-ms + "," + $transition-3
+	@if $transition-4
+		@if nth($transition-4, 1) == "transform"
+			$full-webkit: $full-webkit + "," + "-webkit-" + $transition-4
+			$full-moz: $full-moz + "," + "-moz-" + $transition-4
+			$full-o: $full-o + "," + "-o-" + $transition-4
+			$full-ms: $full-ms + "," + "-ms-" + $transition-4
+		@else
+			$full-webkit: $full-webkit + "," + $transition-4
+			$full-moz: $full-moz + "," + $transition-4
+			$full-o: $full-o + "," + $transition-4
+			$full-ms: $full-ms + "," + $transition-4
+	@if $transition-5
+		@if nth($transition-5, 1) == "transform"
+			$full-webkit: $full-webkit + "," + "-webkit-" + $transition-5
+			$full-moz: $full-moz + "," + "-moz-" + $transition-5
+			$full-o: $full-o + "," + "-o-" + $transition-5
+			$full-ms: $full-ms + "," + "-ms-" + $transition-5
+		@else
+			$full-webkit: $full-webkit + "," + $transition-5
+			$full-moz: $full-moz + "," + $transition-5
+			$full-o: $full-o + "," + $transition-5
+			$full-ms: $full-ms + "," + $transition-5
+	@if $transition-6
+		@if nth($transition-6, 1) == "transform"
+			$full-webkit: $full-webkit + "," + "-webkit-" + $transition-6
+			$full-moz: $full-moz + "," + "-moz-" + $transition-6
+			$full-o: $full-o + "," + "-o-" + $transition-6
+			$full-ms: $full-ms + "," + "-ms-" + $transition-6
+		@else
+			$full-webkit: $full-webkit + "," + $transition-6
+			$full-moz: $full-moz + "," + $transition-6
+			$full-o: $full-o + "," + $transition-6
+			$full-ms: $full-ms + "," + $transition-6
+	-webkit-transition: unquote($full-webkit)
+	-moz-transition: unquote($full-moz)
+	-o-transition: unquote($full-o)
+	-ms-transition: unquote($full-ms)
+
+
+
+*
+	margin: 0
+	padding: 0
+
+body
+	background: url('/static/secret_santa/img/woodbg.jpg')
+	font-family: "Museo Sans 500"
+	font-size: 16px
+
+nav
+	color: #ececec
+	a
+		display: inline-block
+		margin-left: 20px
+		margin-right: 20px
+		color: white
+		text-decoration: none
+		&:hover
+			text-decoration: underline
+
+header
+	background: url('/static/secret_santa/img/headerbg.png') repeat-x bottom
+	padding-top: 15px
+	height: 160px
+	nav
+		@include container
+		text-align: right
+	h1.site-title
+		@include container
+		text-shadow: 0px 5px 5px $semi-grey
+		font-family: "Dancing Script"
+		#font-family: "Tangerine"
+		font-weight: bold
+		font-size: 64px
+		line-height: 1em
+		color: #ececec
+		margin-top: 0px
+.content
+	@include container
+	width: $content-width - 100px
+	min-height: 400px
+	.content-banner
+		position: relative
+		margin-top: -60px
+		h1.page-title
+			line-height: 86px
+			color: white
+			font-family: "Museo Slab 500"
+			font-weight: normal
+			font-style: italic
+			font-size: 30px
+			text-align: center
+			vertical-align: middle
+			text-shadow: 0px 3px 3px $semi-grey
+			background: url('/static/secret_santa/img/ribbonbg.png') repeat-x
+			&:before
+				content: url('/static/secret_santa/img/banner-star-left.png')
+				padding-right: 35px
+				padding-top: 5px
+			&:after
+				content: url('/static/secret_santa/img/banner-star-right.png')
+				padding-left: 35px
+				padding-top: 5px
+			position: relative
+			z-index: 1
+			@include box-shadow(0px, 8px, 10px, -3px, $semi-grey)
+		&:before
+			content: url('/static/secret_santa/img/ribbon-left.png')
+			padding-top: 10px
+			margin-left: -83px
+			float: left
+		&:after
+			content: url('/static/secret_santa/img/ribbon-right.png')
+			padding-top: 10px
+			margin-right: -83px
+			position: absolute
+			top: 0
+			right: 0
+	.instructions, .info
+		padding: 20px 30px
+		@include border-radius(10px)
+		background: #eff2f5
+		@include multi-box-shadow(0px 2px 2px 0px $semi-grey inset, 0px -2px 2px 0px $semi-white inset)
+	.info
+		text-align: center
+		width: 300px
+		margin: auto
+		top: -80px
+		position: relative
+		a
+			color: #1F1F1F
+	.instructions
+		margin-top: 80px
+		width: 400px
+		h2
+			font-family: "Museo Slab 500 Italic"
+			font-weight: normal
+			text-align: right
+			padding-bottom: 10px
+			border-bottom: 1px solid #888
+			margin-bottom: 20px
+		p
+			margin-top: 10px
+			color: #444
+			em
+				color: #1F1F1F
+				font-style: normal
+	.pencil
+		margin-top: 10px
+		display: block
+		width: 550px
+		height: 100px
+		background: url('/static/secret_santa/img/pencil.png') no-repeat left
+		&:hover
+			background-image: url('/static/secret_santa/img/pencil-glow.png')
+
+form.exchange
+	display: none
+	position: absolute
+	z-index: 100
+	top: 0
+	left: 0
+	height: 100%
+	width: 100%
+	background: $semi-grey
+	.fields
+		background:  url('/static/secret_santa/img/form.png') no-repeat center center
+		height: 360px
+		$width: 754px
+		width: $width
+		position: absolute
+		top: 50%
+		left: 50%
+		margin-left: -$width / 2
+		margin-top: -178px
+		input, select, option, .errorlist
+			font-size: 20px
+			color: #333
+			position: absolute
+		#id_giver, #id_password
+			padding-left: 20px
+			width: 200px
+			height: 30px
+			opacity: 0.5
+			filter: alpha(opacity=50)
+			left: 420px
+		#id_giver
+			top: 128px
+		.giver.errorlist
+			top: 128px + 30px + 10px
+		#id_password
+			top: 205px
+		.password.errorlist
+			top: 205px + 30px + 15px
+		.errorlist
+			color: red
+			li
+				list-style: none
+			&.field
+				left: 420px
+				li
+					&:before
+						content: "\25B2 \0020"
+						top: -5px
+						position: relative
+						font-size: 0.8em
+		.non_field.errorlist
+			$errorlist_width: 470px
+			width: $errorlist_width
+			padding: 20px 30px
+			position: absolute
+			top: -5px
+			left: 160px
+			background-color: white
+			@include border-radius(5px)
+			@include box-shadow(0px, 5px, 5px, 0px, $semi-grey)
+			border: 2px solid #666
+			&:before, &:after
+				content: ' '
+				position: absolute
+				left: $errorlist_width / 2
+				width: 0
+				height: 0
+				border: 25px solid transparent
+			&:before
+				bottom: -50px
+				border-top-color: #666
+			&:after
+				bottom: -48px
+				border-top-color: white
+		.submit
+			height: 54px
+			width: 164px
+			bottom: 0
+			right: 30px
+			@include box-shadow(0px, 5px, 5px, 0px, $semi-grey)
+			@include border-radius(10px)
+			border: none
+			font-weight: bold
+			text-shadow: 0px 1px 0px $semi-grey inset
+			background: #eff0a8 /* Old browsers */
+			background: -moz-linear-gradient(top, #eff0a8 0%, #d4d725 100%) /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eff0a8), color-stop(100%,#d4d725)) /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top, #eff0a8 0%,#d4d725 100%) /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top, #eff0a8 0%,#d4d725 100%) /* Opera 11.10+ */
+			background: -ms-linear-gradient(top, #eff0a8 0%,#d4d725 100%) /* IE10+ */
+			background: linear-gradient(top, #eff0a8 0%,#d4d725 100%) /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eff0a8', endColorstr='#d4d725',GradientType=0 ) /* IE6-9 */
+			&:hover
+				@include box-shadow(0px, 0px, 5px, 3px, #fff)
+			&:active
+				background: #d4d725 /* Old browsers */
+				background: -moz-linear-gradient(top, #d4d725 0%, #eff0a8 100%) /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d4d725), color-stop(100%,#eff0a8)) /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top, #d4d725 0%,#eff0a8 100%) /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top, #d4d725 0%,#eff0a8 100%) /* Opera 11.10+ */
+				background: -ms-linear-gradient(top, #d4d725 0%,#eff0a8 100%) /* IE10+ */
+				background: linear-gradient(top, #d4d725 0%,#eff0a8 100%) /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d725', endColorstr='#eff0a8',GradientType=0 ) /* IE6-9 */
+	// animation
+	@include transition(background 1s ease-in-out, z-index 1s ease-in-out 1s)
+	.fields
+		@include transition(transform 1s ease-in-out, top 1s ease-in-out 1s, left 1s ease-in-out 1s, margin-top 1s ease-in-out 1s, margin-left 1s ease-in-out 1s)
+		.submit, .errorlist
+			@include transition(opacity 1s ease-in-out)
+	&.submitted
+		background: none
+		z-index: 2
+		.fields
+			@include transform(0.2, 90deg)
+			top: 0%
+			margin-top: 25px
+			margin-left: -120px
+			.submit, .errorlist
+				opacity: 0
+		.drop_transition
+			@include transition(top 0.5s ease-in)
+			top: 45px
+		.drop
+			top: 125px
+
+.stocking
+	position: absolute
+	top: 180px
+	$width: 262px
+	right: 50%
+	margin-right: -$width / 2 - 270px
+	&.upper
+		z-index: 5
+
+footer
+	margin-top: 20px
+	height: 58px
+	background: url('/static/secret_santa/img/footerbg.png') repeat-x
+	padding-top: 30px
+	text-align: center
+	.copyright
+		padding-top: 0.5em
+		color: #404040

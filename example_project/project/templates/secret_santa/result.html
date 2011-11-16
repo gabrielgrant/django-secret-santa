@@ -1,0 +1,194 @@
+{% extends 'secret_santa/form.html' %}
+
+<! doctype html>
+<html>
+<head>
+<title>Floyd Family Christmas - {% block head_title %}Results{% endblock %}</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/secret_santa/font/fonts.css" />
+<link href='http://fonts.googleapis.com/css?family=Tangerine:700|Patrick+Hand|Neucha|Schoolbell|Dancing+Script:700|Delius|Indie+Flower|Architects+Daughter' rel='stylesheet' type='text/css'>
+{% block extra_head %}
+<script type="text/javascript" src="/static/secret_santa/js/raphael-min.js"></script>
+<script type="text/javascript" src="/static/secret_santa/js/raphael.blur.js"></script>
+<script type="text/javascript">
+$(function(){$('#card').css('visibility', 'hidden');});
+window.onload = (function(){
+	var r = Raphael('card_animation_container', 710, 650);
+	var crease_shadow = r.rect(248, 75, 6, 300);
+	var left_shadow = r.path('M 250,80  l 440,0  l 0,300  l -450,0  Z');
+	var left_inside = r.path('M 250,75  l 450,0  l 0,300  l -450,0  Z');
+	var left_outside = r.path('M 245,75  l 450,0  l 0,300  l -450,0  Z');
+	var paper_set = r.set();
+	paper_set.push(left_inside, left_outside)
+	left_shadow.attr({fill: '270-#000:0-#000:80', 'opacity': '0.01', 'stroke': null});
+	left_shadow.blur(4);
+	crease_shadow.attr({fill: 'rgba(0,0,0,0.05)', 'stroke': null});
+	crease_shadow.blur(5);
+	paper_set.attr({fill: "url('/static/secret_santa/img/cardbg.jpg')", 'stroke': null});
+	card_graphic = r.image('/static/secret_santa/img/card_graphic_text.png', 275, 270, 400, 72);
+	left_thickness = r.rect(250 + 450, 75, 5, 300);
+	left_thickness.attr({fill: "url('/static/secret_santa/img/cardbg.jpg')", 'stroke': null});
+	$('#card').css({'left': '-120px', 'position': 'relative'});
+	$('#card').css('visibility', 'visible');
+	var x_trans = Math.floor((450 + 0.09 * 450)/2);
+	function centerCard(){
+		$('#card').animate({'left': '0px'}, 300, function(){setTimeout(openCard, 300);});
+	}
+	function openCard(){
+		card_graphic.animate(
+			{
+				'65%': {'transform': 'm 0, 0.09, 0, 1, '+ x_trans + ', 0'},
+				'100%': {}
+			},
+			2000,
+			'ease-in-out'
+		);
+		left_inside.animate(
+			{
+				'65%': {'path': 'M 250,75  l 0,-40  l 0,380  l 0,-40  Z'},
+				'100%': {'path': 'M 250,75  l -200,-35  l 0,370  l 200,-35  Z'}
+			},
+			2000,
+			'ease-in-out'
+		);
+		left_outside.animate(
+			{
+				'65%': {'path': 'M 245,75  l 0,-40  l 0,380  l 0,-40  Z'},
+				'100%': {'path': 'M 245,75  l -200,-35  l 0,370  l 200,-35  Z'}
+			},
+			2000,
+			'ease-in-out'
+		);
+		left_thickness.animate(
+			{
+				'65%': {'x': 245, 'y': 40, 'width': 5, 'height': 380},
+				'100%': {'x': 45, 'y': 40, 'width': 5, 'height': 370}
+			},
+			2000,
+			'ease-in-out'
+		);
+		left_shadow.animate({
+				'65%': {'path': 'M 245,75  l 0,320  l 0,300  l 0,-320  Z'},
+				'100%': {
+					'path': 'M 240,75  l -190,160  l 0,300  l 190,-160  Z',
+					'callback': function(){ $('.info').css('z-index', '5');}
+				}
+			},
+			2000,
+			'ease-in-out'
+		);
+	}
+	setTimeout(centerCard, 500);
+});
+</script>
+<style type="text/css">
+body {
+	background: url('/static/secret_santa/img/woodbg.jpg');
+}
+#card {
+	margin: auto;
+	top: -70px;
+	width: 710px;
+	height: 500px;
+	z-index: 3;
+}
+
+#card_html_container {
+	position: relative;
+	top: -650px;
+	z-index: -1;
+}
+#card_inner {
+	margin-left: 250px;
+	margin-top: 75px;
+	width: 450px;
+	height: 125px;
+	/*padding-top: 175px;*/
+	height: 300px;
+	background: url('/static/secret_santa/img/cardbg.jpg');
+	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+#card_inner p {
+	float: left;
+	margin-top: 10px;
+}
+.to, .from {
+	width: 100px;
+	text-align: right;
+	clear: left;
+	font-family: 'Museo Sans 500';
+	color: #38995f
+}
+.to_name, .from_name {
+	margin-left: 30px;
+	/*margin-top: 16px;*/
+	padding-left: 30px;
+	width: 250px;
+	height: 14px;
+	font-size: 26px;
+	line-height: 14px;
+	border-bottom: 2px solid #38995f;
+	font-family: 'Architects Daughter';
+	color: #454EC4;
+}
+.writing {
+	padding-top: 65px;
+	margin-left: 75px
+}
+.writing p {
+	clear: both;
+	width: 300px;
+	font-family: 'Architects Daughter';
+	color: #454EC4;
+}
+.writing .receiver {
+	font-weight: bold;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+#card_inner p.love {
+	margin-top: 20px;
+	text-align: right;
+}
+
+</style>
+{% endblock extra_head %}
+</head>
+<body>
+	{% block page_title %}The Machine Speaks{% endblock %}
+	{% block content_body %}
+	<div id="card">
+		<div id="card_animation_container" class="container"></div>
+		<div id="card_html_container" class="container">
+			<div id="card_inner">
+				<div class="writing">
+					<p>
+						Dear {{ giver.name }}, 
+					</p>
+					<p>
+						You are giving to <span class="receiver">{{ receiver.name }}</span>&thinsp;!&thinsp; But don&rsquo;t forget that
+						<span class="receiver">Marg</span> and <span class="receiver">Keiran</span> are on the &ldquo;Gifts from All&rdquo;&nbsp;list.
+					</p>
+					<p>
+						Have fun shopping&thinsp;!
+					</p>
+					<p class="love">
+						Love, Gabriel
+					</p>
+				</div>
+				<!--p class="to">TO</p>
+				<p class="to_name">{{ receiver.name }}</p>
+				<p class="from">FROM</p>
+				<p class="from_name">{{ giver.name }}</p-->
+			</div>
+		</div>
+	</div>
+	<p class="info">What's this all about?<br /><a href="/about">Get more info...</a></p>
+	{% endblock content_body %}
+	{% block extra_body %}{% endblock %}
+</body>
+</html>
+
+

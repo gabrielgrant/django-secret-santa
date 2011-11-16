@@ -1,0 +1,110 @@
+<! doctype html>
+<html>
+<head>
+<title>Floyd Family Christmas - {% block head_title %}Welcome!{% endblock %}</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Tangerine:700|Patrick+Hand|Neucha|Schoolbell|Dancing+Script:700|Delius|Indie+Flower|Architects+Daughter' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Museo+Sans|Museo+Slab' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="/static/secret_santa/font/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/static/secret_santa/css/main.css" />
+{% block extra_head %}
+<script type="text/javascript">
+$(function(){
+	$('a.pencil').click(function(){
+		$('form.exchange').show();
+	});
+	$('form.exchange .submit').click(function(){
+		var form = $(this).closest('form');
+		form.addClass('submitted');
+		var fields = form.find('.fields');
+		setTimeout(function(){
+			fields.addClass('drop_transition').addClass('drop');
+			setTimeout(function(){form.submit();}, 2000);
+		}, 2100);
+		return false;
+	});
+	{% if form.errors %}
+	$('form.exchange').show();
+	{% endif %}
+});
+{% endblock extra_head %}
+</script>
+</head>
+<body>
+	<header>
+		<nav>
+			<a href="/">Home</a>
+			| <a href="/about">About</a>
+			| <a href="/contact">Contact</a>
+		</nav>
+		<h1 class="site-title">Floyd Family Christmas</h1>
+	</header>
+	<div class="content">
+		<div class="content-banner">
+			<h1 class="page-title">{% block page_title %}Welcome to the Machine{% endblock %}</h1>
+		</div>
+		<div class="content-body">
+			{% block content_body %}
+			<div class="instructions">
+				<h2>Gift-Giving Name Exchange</h2>
+				<p>
+					Hello fellow Floyd Family Christmas Attendee!
+					<!--Welcome to the digital version of our annual gift-giving
+					name exchage.-->
+				</p>
+				<p>
+					Select your name and choose a password to
+					be randomly assigned the family member to whom you'll be giving.
+				</p>
+				<p>
+					<em>Click on the pencil below to begin.</em>
+				<p>
+			</div>
+			<a href="#form" class="pencil"></a>
+			<div class="card">
+				<div class="outer left">
+				</div>
+				<div class="inner left">
+				</div>
+				<div class="inner right">
+				</div>
+			</div>
+			{% endblock content_body %}
+		</div>
+	</div>
+	{% block extra_body %}
+	<form class="exchange" action="" method="post">{% csrf_token %}
+		<div class="fields">
+			{% if form.non_field_errors %}
+			<ul class="non_field errorlist">
+				{% for error in form.non_field_errors %}
+				<li>{{ error|escape }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{{ form.giver }}
+			{{ form.giver.errors }}
+			{{ form.password }}
+			{% if form.password.errors %}
+			<ul class="password errorlist field">
+				{% for error in form.password.errors %}
+				<li>{{ error|escape }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			<input type="submit" class="submit" value="Done" />
+		</div>
+	</form>
+	<img class="stocking lower" src="/static/secret_santa/img/stocking-lower.png" />
+	<img class="stocking upper" src="/static/secret_santa/img/stocking-upper.png" />
+	{% endblock extra_body %}
+	<footer>
+		<nav>
+			<a href="/">Home</a>
+			| <a href="/about">About</a>
+			| <a href="/contact">Contact</a>
+		</nav>
+		<p class="copyright">Hand made in San Francisco, USA by <a href="http://gabrielgrant.ca">Gabriel Grant</a></p>
+	</footer>
+</body>
+</html>
