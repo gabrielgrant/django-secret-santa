@@ -116,5 +116,15 @@
       "name": "Susan", 
       "family": 4
     }
+  },
+  {
+    "pk": 10, 
+    "model": "secret_santa.person", 
+    "fields": {
+      "key": "", 
+      "chosen_family": null, 
+      "name": "Alicia", 
+      "family": 1
+    }
   }
 ]
